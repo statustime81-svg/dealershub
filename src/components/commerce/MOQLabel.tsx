@@ -1,0 +1,1 @@
+export function MOQLabel({quantity,unit='pcs'}:{quantity:number;unit?:string}){return <p className="text-xs text-muted">MOQ: <span className="font-mono font-semibold text-foreground">{quantity} {unit}</span></p>;}

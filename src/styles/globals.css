@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/*
+ * DealersHub design foundation.
+ * Canonical palette: supplied Lime & Midnight design guide.
+ */
+
+@theme {
+  --font-sans:
+    "Geist Variable",
+    "Geist",
+    system-ui,
+    sans-serif;
+
+  --font-mono:
+    "Geist Mono Variable",
+    "Geist Mono",
+    monospace;
+
+  --color-midnight: #0b1220;
+  --color-midnight-raised: #111b2e;
+
+  --color-lime: #c6f432;
+  --color-lime-hover: #a8d91f;
+
+  --color-canvas: #f8fafc;
+  --color-surface: #ffffff;
+  --color-soft: #f1f5f9;
+
+  --color-foreground: #111827;
+  --color-muted: #64748b;
+  --color-border: #e5e7eb;
+
+  --color-success: #15803d;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-info: #2563eb;
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background: var(--color-canvas);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    min-height: 100%;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100dvh;
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.4286;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button:not(:disabled),
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    cursor: not-allowed;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [tabindex] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-info);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    color: var(--color-midnight);
+    background: var(--color-lime);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .tabular-numbers {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .app-transition {
+    transition:
+      color 150ms ease,
+      background-color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease,
+      opacity 150ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* DealersHub typography refinement */
+@layer base {
+  body {
+    font-family: "Geist Variable", "Geist", sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Geist Variable", "Geist", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+  }
+
+  button {
+    font-weight: 500;
+  }
+
+  th {
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Login and onboarding headings */
+h1.text-3xl,
+h2.text-3xl {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+/* Dashboard figures, prices and technical data */
+.font-mono {
+  font-family: "Geist Mono Variable", "Geist Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.025em;
+}

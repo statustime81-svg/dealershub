@@ -1,0 +1,2 @@
+import { useId,type ReactNode } from "react";
+export function DropdownMenu({label,children}:{label:string;children:ReactNode}){const id=useId();return <details className="relative"><summary className="inline-flex min-h-11 cursor-pointer items-center rounded-lg border border-border bg-surface px-3 text-sm" aria-controls={id}>{label}</summary><div id={id} className="absolute right-0 z-30 mt-2 min-w-48 space-y-1 rounded-lg border border-border bg-surface p-2 shadow-lg">{children}</div></details>;}

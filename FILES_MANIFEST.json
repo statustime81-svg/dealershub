@@ -1,0 +1,40 @@
+{
+  "patch": "Dealer company storefront redesign",
+  "implementation_files": 8,
+  "database_changes": false,
+  "new_dependencies": false,
+  "files": [
+    {
+      "path": "src/features/storefront/components/DealerProductTile.tsx",
+      "sha256": "653d51ebcbb30d75c4842a7d537148a1ff9d305eafb593a8a5b52df51a57f269"
+    },
+    {
+      "path": "src/features/storefront/components/DealerStoreHero.tsx",
+      "sha256": "1afbf4e4e7703dc9d3fcf8b4da0e7a380333b0aaaec70770de266d96875c674b"
+    },
+    {
+      "path": "src/features/storefront/pages/AuthorizedStoresPage.tsx",
+      "sha256": "cc45111dd24ad97cd9e79cf37b55f06e158bd497f1e22c4e98a02791d96597d1"
+    },
+    {
+      "path": "src/features/storefront/pages/ProductListingPage.tsx",
+      "sha256": "78171dc65af72500f3d39c3022e347e7b584f6eced1db5f1430bc1baf23e80e5"
+    },
+    {
+      "path": "src/features/storefront/pages/StoreHomePage.tsx",
+      "sha256": "0394f2b3d9606a404ef44729fc89c851e74108f4a9dd618fb7be7e231f183e5b"
+    },
+    {
+      "path": "src/layouts/DealerLayout.tsx",
+      "sha256": "f00ecefc5b4d995fcdc2bdfe53c44ff9e50e099d024a2d0ab789c32bcdcdcc0f"
+    },
+    {
+      "path": "src/layouts/StorefrontLayout.tsx",
+      "sha256": "cc338ce5c23a25093e456a534262066f0319ac737573abcc5453bce4e04b95e1"
+    },
+    {
+      "path": "src/styles/dealer-storefront.css",
+      "sha256": "7985e37ece7622ced6d4659cd43f27676b73ed0529da1072068c946e3a1c6e5a"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+import { Button } from "@/components/ui/Button";
+export function ErrorState({message='This section could not load.',onRetry}:{message?:string;onRetry?:()=>void}){return <section className="rounded-xl border border-border bg-surface p-5"><p role="alert" className="text-sm text-danger">{message}</p>{onRetry&&<Button className="mt-3" variant="secondary" onClick={onRetry}>Try again</Button>}</section>;}

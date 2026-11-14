@@ -1,0 +1,54 @@
+/* Scoped onboarding UI. The navbar stays in normal document flow. */
+.dh-onboarding{min-height:100dvh;background:var(--color-canvas,#f8fafc);color:var(--color-foreground,#111827);font-family:var(--font-sans, sans-serif)}
+.dh-onboarding-header{position:static;inset:auto;background:var(--color-midnight,#0b1220);border-bottom:1px solid #ffffff12}
+.dh-onboarding-nav{max-width:1280px;margin:auto;min-height:76px;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.dh-onboarding-logo{display:inline-flex;gap:12px;align-items:center;color:white;font-size:23px;font-weight:650;letter-spacing:-.045em;text-decoration:none}
+.dh-onboarding-logo>span{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--color-lime,#c6f432);color:var(--color-midnight,#0b1220)}
+.dh-onboarding-nav-link{display:inline-flex;align-items:center;gap:8px;color:#dce4ef;font-size:13px;text-decoration:none}
+.dh-onboarding-nav-link:hover{color:var(--color-lime,#c6f432)}
+.dh-onboarding-main{max-width:1280px;margin:auto;padding:44px 32px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start;gap:64px}
+.dh-onboarding-intro{padding-top:26px;animation:dh-auth-enter .4s ease both}
+.dh-onboarding-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--color-muted,#64748b)}
+.dh-onboarding-eyebrow:before{content:"";width:7px;height:7px;background:var(--color-lime,#c6f432);border-radius:50%;box-shadow:0 0 0 4px #c6f43225}
+.dh-onboarding-intro h1{font-size:clamp(36px,4vw,53px);line-height:1.08;letter-spacing:-.055em;font-weight:600;margin:22px 0}
+.dh-onboarding-intro h1>span{background:linear-gradient(transparent 60%,#c6f43290 60%)}
+.dh-onboarding-intro>p{font-size:14px;line-height:1.8;max-width:360px;color:var(--color-muted,#64748b)}
+.dh-onboarding-benefits{display:grid;gap:23px;margin-top:36px}
+.dh-onboarding-benefits>div{display:flex;gap:13px;align-items:start}
+.dh-onboarding-benefits>div>span{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:12px;border:1px solid var(--color-border,#e5e7eb);background:white}
+.dh-onboarding-benefits h2{font-size:13px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
+.dh-onboarding-benefits p{font-size:12px;line-height:1.6;color:var(--color-muted,#64748b);margin:0}
+.dh-onboarding-note{display:flex;align-items:start;gap:10px;margin-top:36px;padding-top:20px;border-top:1px solid var(--color-border,#e5e7eb);max-width:360px;font-size:12px;line-height:1.7;color:var(--color-muted,#64748b)}
+.dh-onboarding-note svg{flex:none;margin-top:3px}
+.dh-onboarding-panel{min-width:0;background:white;border:1px solid var(--color-border,#e5e7eb);border-radius:20px;padding:30px;box-shadow:0 12px 40px #0b122005;animation:dh-auth-enter .4s .05s ease both}
+.dh-onboarding-panel>section>h2{font-size:26px;font-weight:600;letter-spacing:-.035em;line-height:1.25}
+.dh-onboarding-panel>section>h2:after{content:"Create a workspace for your company and dealer network.";display:block;font-size:13px;line-height:1.7;font-weight:400;letter-spacing:0;color:var(--color-muted,#64748b);margin-top:9px}
+.dh-onboarding-panel>section>a{font-size:12px;min-height:32px;margin-top:8px}
+.dh-business-form{margin-top:22px;display:grid;gap:22px}
+.dh-onboarding-fields{min-width:0;margin:0;padding:18px 0 0;border:0;border-top:1px solid var(--color-border,#e5e7eb);display:grid;gap:16px}
+.dh-onboarding-fields legend{padding:0 10px 0 0;display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600}
+.dh-onboarding-fields legend>span{font-family:var(--font-mono,monospace);font-size:10px;padding:3px 6px;border-radius:5px;background:#c6f43230;color:#42550e}
+.dh-onboarding-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.dh-onboarding-fields label{font-size:12px;font-weight:500}
+.dh-onboarding-fields input,.dh-onboarding-fields select{min-height:44px;font-size:13px;border-radius:9px}
+.dh-onboarding-fields textarea{min-height:78px;font-size:13px;border-radius:9px;resize:vertical}
+.dh-onboarding-form-note{font-size:11px;line-height:1.7;color:var(--color-muted,#64748b);margin:0}
+.dh-onboarding-footer{max-width:1280px;margin:auto;padding:0 32px 24px;color:var(--color-muted,#64748b);font-size:11px}
+@keyframes dh-auth-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1023px){.dh-onboarding-main{grid-template-columns:1fr;max-width:760px;gap:25px;padding-top:28px}.dh-onboarding-intro{padding-top:0}.dh-onboarding-intro h1{font-size:34px;margin:15px 0}.dh-onboarding-intro h1 br{display:none}.dh-onboarding-intro h1 br:after{content:" "}.dh-onboarding-intro h1>span{margin-left:8px}.dh-onboarding-intro>p{max-width:560px}.dh-onboarding-benefits,.dh-onboarding-note{display:none}}
+@media(max-width:639px){.dh-onboarding-nav{min-height:68px;padding:14px 18px}.dh-onboarding-logo{font-size:20px;gap:9px}.dh-onboarding-logo>span{width:34px;height:34px;border-radius:9px}.dh-onboarding-nav-link{font-size:11px;max-width:110px}.dh-onboarding-main{padding:22px 16px;gap:20px}.dh-onboarding-panel{padding:22px 18px;border-radius:16px}.dh-onboarding-panel>section>h2{font-size:23px}.dh-onboarding-field-grid{grid-template-columns:1fr;gap:14px}.dh-onboarding-intro h1{font-size:30px}.dh-onboarding-intro>p{font-size:12px}.dh-onboarding-footer{padding:4px 18px 22px}}
+@media(prefers-reduced-motion:reduce){.dh-onboarding-intro,.dh-onboarding-panel{animation:none}}
+
+
+
+
+/* Sticky navbar: login, registration and onboarding */
+.dh-auth-header,
+.dh-onboarding-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: var(--color-midnight, #0b1220);
+  box-shadow: 0 4px 16px rgb(11 18 32 / 8%);
+}

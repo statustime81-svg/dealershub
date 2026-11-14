@@ -1,0 +1,2 @@
+import { Button } from "./Button";
+export function Toast({message,tone='success',onDismiss}:{message:string;tone?:'success'|'error';onDismiss:()=>void}){return <div role={tone==='error'?'alert':'status'} className="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface p-4 shadow-lg"><p className={tone==='error'?'text-sm text-danger':'text-sm text-success'}>{message}</p><Button size="sm" variant="ghost" onClick={onDismiss}>Dismiss</Button></div>;}

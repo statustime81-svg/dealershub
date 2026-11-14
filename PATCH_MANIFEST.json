@@ -1,0 +1,28 @@
+{
+  "source_files": 3,
+  "images": 2,
+  "files": [
+    {
+      "path": "src/pages/LandingPage.tsx",
+      "sha256": "f8f3474cfb8b7182180d8a2750f2745dec591c75028edc7a343fd4cab71e8042"
+    },
+    {
+      "path": "src/layouts/PublicLayout.tsx",
+      "sha256": "a7f9f59a64fe749e77e3766b1b6d3a7c017bcc2916fcd48987df08d4d28209de"
+    },
+    {
+      "path": "src/styles/landing.css",
+      "sha256": "4fc3f8e29291948beab567832b9701298eaa61f5ea3674abdf213bba436185b9"
+    },
+    {
+      "path": "public/images/landing/dashboard-preview.png",
+      "sha256": "5c5df6f40f55e4e7644b1aa163751ae11e2c944b5fa74f91a670668e3c7d0df5"
+    },
+    {
+      "path": "public/images/landing/storefront-preview.png",
+      "sha256": "98d6c6f1c063dc9b8dbf47790b01e1a680087df105d5760d8d9e636b41134975"
+    }
+  ],
+  "changes_auth_permissions": false,
+  "requires_new_dependencies": false
+}

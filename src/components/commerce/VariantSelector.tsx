@@ -1,0 +1,2 @@
+import { Select } from "@/components/ui/Select";
+export function VariantSelector({variants,value,onChange,disabled=false}:{variants:{id:string;name:string}[];value:string;onChange:(id:string)=>void;disabled?:boolean}){return <Select label="Variant" value={value} disabled={disabled} onChange={e=>onChange(e.target.value)}>{variants.map(v=><option key={v.id} value={v.id}>{v.name}</option>)}</Select>;}

@@ -1,0 +1,2 @@
+/* Canonical visual tokens are defined once in globals.css @theme. */
+:root { --dealershub-radius: 0.5rem; --dealershub-card-radius: 0.75rem; --dealershub-content-width: 1440px; }

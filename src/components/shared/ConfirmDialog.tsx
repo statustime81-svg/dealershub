@@ -1,0 +1,3 @@
+import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
+export function ConfirmDialog({open,title,description,busy=false,onConfirm,onClose}:{open:boolean;title:string;description:string;busy?:boolean;onConfirm:()=>void;onClose:()=>void}){return <Modal open={open} title={title} onClose={onClose} busy={busy}><p className="mb-5 text-sm leading-6 text-muted">{description}</p><div className="flex gap-2"><Button variant="danger" isLoading={busy} onClick={onConfirm}>Confirm</Button><Button variant="secondary" disabled={busy} onClick={onClose}>Cancel</Button></div></Modal>;}

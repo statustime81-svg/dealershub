@@ -1,0 +1,2 @@
+import { NavLink } from "react-router-dom";
+export function MobileNavigation({items,onNavigate}:{items:{label:string;href:string}[];onNavigate?:()=>void}){return <nav aria-label="Mobile navigation" className="flex flex-wrap gap-2">{items.map(i=><NavLink key={i.href} to={i.href} onClick={onNavigate} className={({isActive})=>`inline-flex min-h-11 items-center rounded-lg px-3 text-sm ${isActive?'bg-lime text-midnight':'bg-midnight-raised text-white'}`}>{i.label}</NavLink>)}</nav>;}

@@ -1,0 +1,16 @@
+{
+  "typescript": "Full merged frontend strict/unused checks passed using supplied dependencies",
+  "routing_checks": [
+    "One authorized store opens directly",
+    "Explicit authorized store selection preserved",
+    "Unauthorized explicit store cannot silently open another store",
+    "No access shows invitation entry, without storefront redirect",
+    "Loading state does not redirect before authorization",
+    "Failed authorization fetch does not redirect"
+  ],
+  "limitations": [
+    "Routing checks use mocked authorized-store data, not live Supabase",
+    "No live Auth/RLS/Storage/cart regression or browser/mobile visual testing performed",
+    "No database migrations, Edge functions or permissions changed"
+  ]
+}
