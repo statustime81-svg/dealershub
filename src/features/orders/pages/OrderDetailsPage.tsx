@@ -1,3 +1,4 @@
+import { TestPaymentPanel } from "@/features/payments/components/TestPaymentPanel";
 import { Link, useParams } from "react-router-dom";
 import { z } from "zod";
 import { Button } from "@/components/ui/Button";
@@ -59,6 +60,7 @@ export function OrderWorkspaceContent({ workspace, mode, trackingOnly = false, b
           <dl className="space-y-3">{totals.map(([label, value]) => <div key={label} className={`flex items-center justify-between gap-4 text-sm ${label === "Total" ? "border-t border-border pt-3 font-semibold" : ""}`}>
             <dt>{label}</dt><dd className="font-mono text-xs">{formatCurrency(value)}</dd></div>)}</dl>
         </section>
+        {!trackingOnly && mode !== "manufacturer" && <TestPaymentPanel key={order.id} orderId={order.id} orderStatus={order.status} />}
         {!trackingOnly && <InvoiceDownload documents={workspace.documents} />}
         {mode === "manufacturer" && workspace.canManage && <OrderStatusControls key={`${order.id}:${order.status}:${order.updatedAt}`} workspace={workspace} />}
       </aside>
