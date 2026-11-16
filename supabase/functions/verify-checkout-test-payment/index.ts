@@ -1,0 +1,2 @@
+// Gateway intentionally removed. This endpoint only disables older deployments.
+Deno.serve((request: Request) => new Response(request.method === "OPTIONS" ? null : JSON.stringify({success:false,error:"Online payments have been removed. Contact the manufacturer."}), {status:request.method === "OPTIONS" ? 204 : 410,headers:{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Headers":"authorization, apikey, content-type, x-client-info","Access-Control-Allow-Methods":"POST, OPTIONS","Content-Type":"application/json"}}));

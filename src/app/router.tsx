@@ -1,4 +1,3 @@
-import TestPaymentPage from "@/features/payments/pages/TestPaymentPage";
 import StoreCategoriesPage from "@/features/storefront/pages/StoreCategoriesPage";
 import PublicLayout from "@/layouts/PublicLayout";
 import LandingPage from "@/pages/LandingPage";
@@ -109,7 +108,7 @@ export const router = createBrowserRouter([
               { index: true, element: <DealerWorkspacePage /> },
             ] },
             { path: "orders", element: <SalespersonOrdersPage /> },
-              { path: "test-payment", element: <TestPaymentPage /> },
+              
             { path: "orders/:orderId", element: <SalespersonOrderDetailsPage /> },
           ],
         }],
@@ -155,7 +154,7 @@ export const router = createBrowserRouter([
             { path: routes.dealer.root, element: <Navigate to={routes.dealer.stores} replace /> },
             { path: routes.dealer.stores, element: <AuthorizedStoresPage /> },
             { path: routes.dealer.orders, element: <DealerOrdersPage /> },
-            { path: "/dealer/test-payment", element: <TestPaymentPage /> },
+            
             { path: routes.dealer.profile, element: <ProfilePage /> },
             { path: "/dealer/orders/:orderId", element: <OrderDetailsPage mode="dealer" /> },
             { path: "/dealer/orders/:orderId/tracking", element: <OrderTrackingPage /> },
