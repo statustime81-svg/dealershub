@@ -23,12 +23,19 @@ export function ProductVariantsField() {
 
   const {
     fields,
-    append,
+    prepend,
     remove,
   } = useFieldArray({
     control,
     name: "variants",
   });
+
+  function addVariant() {
+    prepend(createDefaultVariant(), {
+      shouldFocus: true,
+      focusName: "variants.0.name",
+    });
+  }
 
   return (
     <section className="space-y-4">
@@ -38,11 +45,10 @@ export function ProductVariantsField() {
         </h2>
 
         <Button
+          type="button"
           variant="secondary"
           size="sm"
-          onClick={() => {
-            append(createDefaultVariant());
-          }}
+          onClick={addVariant}
         >
           Add variant
         </Button>
@@ -55,16 +61,12 @@ export function ProductVariantsField() {
         >
           <input
             type="hidden"
-            {...register(
-              `variants.${index}.variantId`,
-            )}
+            {...register(`variants.${index}.variantId`)}
           />
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Input
-              {...register(
-                `variants.${index}.name`,
-              )}
+              {...register(`variants.${index}.name`)}
               label="Variant name"
               placeholder="Default, Lemon, 1 Ltr…"
               required
@@ -74,9 +76,7 @@ export function ProductVariantsField() {
             />
 
             <Input
-              {...register(
-                `variants.${index}.sku`,
-              )}
+              {...register(`variants.${index}.sku`)}
               label="SKU"
               error={
                 errors.variants?.[index]?.sku?.message
@@ -88,14 +88,13 @@ export function ProductVariantsField() {
 
           <div className="flex flex-wrap items-center justify-between gap-3">
             <Checkbox
-              {...register(
-                `variants.${index}.isActive`,
-              )}
+              {...register(`variants.${index}.isActive`)}
               label="Variant active"
             />
 
             {fields.length > 1 && (
               <Button
+                type="button"
                 variant="danger"
                 size="sm"
                 onClick={() => remove(index)}
@@ -114,7 +113,7 @@ export function ProductVariantsField() {
       </p>
 
       {errors.variants?.root?.message && (
-        <p className="text-sm text-danger">
+        <p role="alert" className="text-sm text-danger">
           {errors.variants.root.message}
         </p>
       )}

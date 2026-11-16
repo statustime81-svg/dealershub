@@ -65,10 +65,18 @@ export function ProductsTable({
                 ? variants[0]
                 : null;
 
-            const label =
-              variants.length > 1
-                ? `${variants.length} variants`
-                : "Not configured";
+            const prices = variants.map((item) => item.wholesale_price);
+            const quantities = variants.map((item) => item.moq);
+            const priceLabel = prices.length
+              ? Math.min(...prices) === Math.max(...prices)
+                ? formatCurrency(prices[0])
+                : `${formatCurrency(Math.min(...prices))} – ${formatCurrency(Math.max(...prices))}`
+              : "Not configured";
+            const moqLabel = quantities.length
+              ? `${Math.min(...quantities) === Math.max(...quantities)
+                  ? formatNumber(quantities[0])
+                  : `${formatNumber(Math.min(...quantities))} – ${formatNumber(Math.max(...quantities))}`} ${product.unit}`
+              : "Not configured";
 
             const image = [...product.images].sort(
               (a, b) => a.sort_order - b.sort_order,
@@ -104,6 +112,12 @@ export function ProductsTable({
                         {product.brand?.name ?? "No brand"}
                       </p>
 
+                      {variants.length > 1 && (
+                        <p className="mt-1 text-xs text-muted">
+                          {variants.length} active variants
+                        </p>
+                      )}
+
                       {variant?.sku && (
                         <p className="mt-1 font-mono text-xs text-muted">
                           {variant.sku}
@@ -118,17 +132,11 @@ export function ProductsTable({
                 </td>
 
                 <td className="px-4 py-3">
-                  {variant
-                    ? `${formatNumber(variant.moq)} ${product.unit}`
-                    : label}
+                  {moqLabel}
                 </td>
 
                 <td className="px-4 py-3 font-mono text-xs">
-                  {variant
-                    ? formatCurrency(
-                        variant.wholesale_price,
-                      )
-                    : label}
+                  {priceLabel}
                 </td>
 
                 <td className="px-4 py-3 font-mono text-xs">
