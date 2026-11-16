@@ -26,7 +26,7 @@ export default function ManufacturerLayout() {
 
   return (
     <div className="min-h-dvh bg-canvas">
-      <aside className="fixed inset-y-0 left-0 hidden w-64 overflow-y-auto bg-midnight [scrollbar-color:#334155_#0b1220] lg:block">
+      <aside className="fixed inset-y-0 left-0 hidden w-56 overflow-y-auto bg-midnight [scrollbar-color:#334155_#0b1220] lg:block">
         <AppSidebar />
       </aside>
 
@@ -75,7 +75,7 @@ export default function ManufacturerLayout() {
         </div>
       </dialog>
 
-      <div className="lg:pl-64">
+      <div className="lg:pl-56">
         <div className="sticky top-0 z-40 bg-surface">
           <AppHeader onOpenNavigation={openNavigation} />
         </div>

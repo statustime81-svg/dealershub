@@ -1,15 +1,48 @@
 import { Link } from "react-router-dom";
-import { Package,Users,UsersRound,Store } from "lucide-react";
-import { PageHeader } from "@/components/shared/PageHeader";
+import { Package, Users, UsersRound, Store, ArrowUpRight } from "lucide-react";
 import { QueryState } from "@/components/shared/QueryState";
 import { useBusiness } from "@/hooks/useBusiness";
 import { routes } from "@/config/routes";
 import { useBusinessDashboardCounts } from "../dashboard.hooks";
 import { ReportWorkspace } from "@/features/reports/components/ReportWorkspace";
-export default function ManufacturerDashboardPage(){
- const{activeBusinessId}=useBusiness();const q=useBusinessDashboardCounts();
- return <div className="space-y-6"><PageHeader title="Dashboard" description="Overview of your business, orders and dealer network."/>
- <QueryState pending={q.isPending} error={q.isError} retry={q.refetch}>{q.data&&<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{[{label:'Active products',value:q.data.products,icon:Package},{label:'Active dealers',value:q.data.dealers,icon:Users},{label:'Active salespeople',value:q.data.salespeople,icon:UsersRound},{label:'Stores',value:q.data.stores,icon:Store}].map(({label,value,icon:Icon})=><div key={label} className="rounded-xl border border-border bg-surface p-5"><div className="flex items-center gap-3"><Icon size={20} aria-hidden="true"/><p className="text-sm">{label}</p></div><p className="mt-3 font-mono text-3xl font-semibold">{value.toLocaleString('en-IN')}</p></div>)}</div>}</QueryState>
- <section className="flex flex-wrap gap-2" aria-label="Quick actions">{[['Add product',routes.manufacturer.addProduct],['Manage dealers',routes.manufacturer.dealers],['Sales team',routes.manufacturer.salesTeam],['Review orders',routes.manufacturer.orders]].map(([name,path])=><Link key={path} className="inline-flex min-h-11 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium hover:bg-lime" to={path}>{name}</Link>)}</section>
- {activeBusinessId&&<ReportWorkspace key={activeBusinessId} businessId={activeBusinessId}/>}</div>;
+import "@/styles/manufacturer-dashboard.css";
+
+export default function ManufacturerDashboardPage() {
+  const { activeBusinessId } = useBusiness();
+  const counts = useBusinessDashboardCounts();
+  const metrics = counts.data ? [
+    { label: "Active products", value: counts.data.products, Icon: Package, href: routes.manufacturer.products },
+    { label: "Active dealers", value: counts.data.dealers, Icon: Users, href: routes.manufacturer.dealers },
+    { label: "Active salespeople", value: counts.data.salespeople, Icon: UsersRound, href: routes.manufacturer.salesTeam },
+    { label: "Stores", value: counts.data.stores, Icon: Store, href: routes.manufacturer.store },
+  ] : [];
+  const actions = [
+    ["Add product", routes.manufacturer.addProduct],
+    ["Manage dealers", routes.manufacturer.dealers],
+    ["Sales team", routes.manufacturer.salesTeam],
+    ["Review orders", routes.manufacturer.orders],
+  ];
+  return (
+    <div className="md-dashboard">
+      <header className="md-dashboard-heading">
+        <h1>Dashboard</h1>
+        <p>Overview of your business, orders and dealer network.</p>
+      </header>
+      <QueryState pending={counts.isPending} error={counts.isError} retry={counts.refetch}>
+        {counts.data && <section className="md-metrics" aria-label="Business totals">
+          {metrics.map(({ label, value, Icon, href }, index) => (
+            <Link key={label} to={href} className="md-metric" style={{ animationDelay: `${index * 40}ms` }}>
+              <span className="md-metric-icon"><Icon size={19} aria-hidden="true" /></span>
+              <span className="md-metric-body"><span>{label}</span><strong>{value.toLocaleString("en-IN")}</strong></span>
+              <ArrowUpRight size={15} className="md-metric-arrow" aria-hidden="true" />
+            </Link>
+          ))}
+        </section>}
+      </QueryState>
+      <section className="md-actions" aria-label="Quick actions">
+        {actions.map(([label, href]) => <Link key={href} to={href}>{label}<ArrowUpRight size={13} aria-hidden="true" /></Link>)}
+      </section>
+      {activeBusinessId && <div className="md-report"><ReportWorkspace key={activeBusinessId} businessId={activeBusinessId} compact /></div>}
+    </div>
+  );
 }

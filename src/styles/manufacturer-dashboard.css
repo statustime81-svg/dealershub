@@ -1,0 +1,344 @@
+.md-dashboard {
+  max-width: 1600px;
+  margin-inline: auto;
+  display: grid;
+  gap: 20px;
+  color: var(--color-foreground, #111827);
+  font-family: var(--font-sans, sans-serif);
+}
+
+.md-dashboard-heading h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: -1px;
+}
+
+.md-dashboard-heading p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-muted, #64748b);
+}
+
+.md-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.md-metric {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  background: var(--color-surface, #ffffff);
+  padding: 18px 16px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+  animation: md-card-enter 350ms ease both;
+}
+
+.md-metric:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-lime-hover, #a8d91f);
+  box-shadow: 0 7px 20px #0b122008;
+}
+
+.md-metric-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--color-soft, #f1f5f9);
+}
+
+.md-metric-body {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.md-metric-body > span {
+  padding-right: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  color: var(--color-muted, #64748b);
+}
+
+.md-metric-body strong {
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 650;
+  letter-spacing: -0.7px;
+  font-variant-numeric: tabular-nums;
+}
+
+.md-metric-arrow {
+  position: absolute;
+  right: 12px;
+  top: 15px;
+  color: #94a3b8;
+}
+
+.md-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.md-actions > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 37px;
+  padding: 8px 13px;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.md-actions > a:hover {
+  background: #c6f43222;
+  border-color: var(--color-lime-hover, #a8d91f);
+}
+
+.md-actions > a > svg {
+  flex-shrink: 0;
+}
+
+.md-report > div {
+  row-gap: 16px;
+}
+
+.md-report form {
+  padding-top: 3px;
+  gap: 12px;
+}
+
+.md-report form label {
+  font-size: 12px;
+}
+
+.md-report form input {
+  min-height: 37px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.md-report form button {
+  min-height: 37px;
+  padding: 8px 15px;
+  font-size: 13px;
+}
+
+.md-report-metric {
+  display: block;
+  padding: 16px 18px;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
+  animation: md-card-enter 350ms ease both;
+}
+
+.md-report-metric:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-lime-hover, #a8d91f);
+}
+
+.md-report .md-report-metric > p:first-child {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.md-report .md-report-metric > p:last-child {
+  margin-top: 6px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.md-report section.rounded-xl {
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.md-report h2 {
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.md-report .text-sm {
+  font-size: 13px;
+}
+
+.md-report .text-xs {
+  font-size: 12px;
+}
+
+.md-report table th {
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-muted, #64748b);
+}
+
+.md-report table td {
+  padding: 10px 8px;
+  font-size: 13px;
+}
+
+.md-report table thead {
+  background: var(--color-soft, #f1f5f9);
+}
+
+.md-report table tbody tr:hover {
+  background: #f9fbf5;
+}
+
+.md-report a:focus-visible,
+.md-metric:focus-visible,
+.md-actions > a:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+@keyframes md-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .md-metric {
+    padding: 16px 12px;
+    gap: 8px;
+  }
+
+  .md-metric-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .md-metric-icon svg {
+    width: 17px;
+  }
+
+  .md-metric-body > span {
+    font-size: 12px;
+  }
+
+  .md-metric-body strong {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 767px) {
+  .md-dashboard {
+    gap: 16px;
+  }
+
+  .md-dashboard-heading h1 {
+    font-size: 26px;
+  }
+
+  .md-dashboard-heading p {
+    font-size: 13px;
+  }
+
+  .md-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .md-metric {
+    padding: 16px 12px;
+  }
+
+  .md-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md-actions > a {
+    font-size: 12px;
+    gap: 8px;
+    padding-inline: 11px;
+  }
+
+  .md-report form {
+    align-items: end;
+  }
+
+  .md-report form > div {
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .md-report section.rounded-xl {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .md-metric-icon {
+    display: none;
+  }
+
+  .md-metric-body strong {
+    font-size: 27px;
+  }
+
+  .md-actions > a {
+    font-size: 12px;
+  }
+
+  .md-report form > div {
+    min-width: 110px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-metric,
+  .md-report-metric,
+  .md-actions > a {
+    animation: none;
+    transition: none;
+  }
+
+  .md-metric:hover,
+  .md-report-metric:hover {
+    transform: none;
+  }
+}
