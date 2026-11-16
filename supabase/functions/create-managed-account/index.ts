@@ -6,7 +6,7 @@ const schema = z.object({businessId:z.string().uuid(),storeId:z.string().uuid().
 Deno.serve(async request => {
  if(request.method === "OPTIONS") return new Response(null,{status:204,headers});
  if(request.method !== "POST") return respond(405,"POST required.");
- try {
+ try {    
   const admin=createClient(Deno.env.get("SUPABASE_URL")!,Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,{auth:{persistSession:false,autoRefreshToken:false}});
   const token=request.headers.get("Authorization")?.match(/^Bearer\s+(\S+)$/i)?.[1];
   if(!token) return respond(401,"Sign in first.");
