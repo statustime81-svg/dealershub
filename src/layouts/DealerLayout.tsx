@@ -1,63 +1,43 @@
+import "@/styles/dealer-storefront.css";
 import { useId, useState } from "react";
 import { Link, NavLink, Outlet, useMatch, useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronDown, LogOut, Menu, Package, Search, ShieldCheck, ShoppingCart, Store, UserRound, X } from "lucide-react";
+import { LogOut,Menu,ShoppingCart,X,Package } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { signOut } from "@/features/auth/auth.api";
 import { useAuthorizedStores } from "@/features/storefront/storefront.hooks";
 import { useCart } from "@/features/cart/cart.hooks";
-import { StoreMediaImage } from "@/features/stores/components/StorePreview";
-import { routeBuilders, routes } from "@/config/routes";
-import "@/styles/dealer-storefront.css";
+import { routeBuilders,routes } from "@/config/routes";
 
-export default function DealerLayout() {
-  const { user } = useAuth(); const navigate = useNavigate(); const menuId = useId(); const selectId = useId();
-  const stores = useAuthorizedStores(); const match = useMatch("/store/:storeId/*");
-  const current = stores.data?.find(store => store.id === match?.params.storeId);
-  const cart = useCart(current?.id ?? "");
-  const [menuOpen, setMenuOpen] = useState(false); const [busy, setBusy] = useState(false); const [error, setError] = useState("");
-  const home = current ? routeBuilders.store(current.id) : routes.dealer.stores;
-  const first = (user?.email?.[0] ?? "D").toUpperCase();
-  async function logout() {
-    setBusy(true); setError("");
-    try { await signOut(); navigate(routes.auth.login, { replace: true }); }
-    catch { setError("Unable to sign out. Please try again."); }
-    finally { setBusy(false); }
-  }
-  const close = () => setMenuOpen(false);
-  return <div className="ds-shell">
-    <a className="ds-skip" href="#dealer-content">Skip to content</a>
-    <div className="ds-topline"><div className="ds-container"><span><ShieldCheck size={13}/> Your authorized wholesale workspace</span><Link to={routes.auth.acceptInvitation}>Business invitations <ArrowRight size={12}/></Link></div></div>
-    <header className="ds-header">
-      <div className="ds-container ds-header-main">
-        <Link to={home} className="ds-brand" onClick={close} aria-label={current ? `${current.name} home` : "Dealer storefront home"}>
-          {current?.logoPath ? <StoreMediaImage bucket="business-logos" path={current.logoPath} alt="" className="ds-brand-image"/> : <span className="ds-brand-fallback"><Store size={24}/></span>}
-          <span><strong>{current?.businessName ?? "DealersHub"}</strong><small>{current?.name ?? "Your wholesale workspace"}</small></span>
-        </Link>
-        {current && <form className="ds-header-search" role="search" onSubmit={event => {
-          event.preventDefault(); const form = new FormData(event.currentTarget); const search = String(form.get("search") ?? "").trim().slice(0, 200);
-          navigate(`${routeBuilders.storeProducts(current.id)}${search ? `?search=${encodeURIComponent(search)}` : ""}`); close();
-        }}><Search size={18} aria-hidden="true"/><input name="search" type="search" maxLength={200} placeholder="Search this store's products…" aria-label={`Search products in ${current.name}`}/><button type="submit" aria-label="Search products"><ArrowRight size={17}/></button></form>}
-        <div className="ds-account-actions">
-          {current && <Link className="ds-cart-link" to={routeBuilders.cart(current.id)} aria-label={`Cart for ${current.name}${cart.data ? `, ${cart.data.items.length} product lines` : ""}`}><ShoppingCart size={21}/><span>Cart</span>{cart.data && cart.data.items.length > 0 && <b>{cart.data.items.length}</b>}</Link>}
-          <Link className="ds-profile-link" to={routes.dealer.profile} title={user?.email}><span>{first}</span><UserRound size={17}/></Link>
-          <button className="ds-menu-toggle" type="button" aria-expanded={menuOpen} aria-controls={menuId} aria-label={menuOpen ? "Close menu" : "Open menu"} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={21}/> : <Menu size={21}/>}</button>
+export default function DealerLayout(){
+  const {user}=useAuth();const navigate=useNavigate();const menuId=useId();const switchId=useId();
+  const stores=useAuthorizedStores();const match=useMatch("/store/:storeId/*");
+  const current=stores.data?.find(store=>store.id===match?.params.storeId);const cart=useCart(current?.id??"");
+  const [open,setOpen]=useState(false);const[busy,setBusy]=useState(false);const[error,setError]=useState("");
+  const home=current?routeBuilders.store(current.id):routes.dealer.stores;
+  const close=()=>setOpen(false);
+  async function logout(){setBusy(true);setError("");try{await signOut();navigate(routes.auth.login,{replace:true});}catch{setError("Unable to sign out. Please try again.");}finally{setBusy(false);}}
+  const navigation=[{name:"Store",to:home,end:true},{name:"My orders",to:routes.dealer.orders},{name:"Profile",to:routes.dealer.profile},{name:"Invitations",to:routes.auth.acceptInvitation}];
+  return <div className="ds-shell flex min-h-dvh flex-col bg-canvas font-sans text-foreground">
+    <a href="#dealer-content" className="fixed -top-20 left-4 z-[100] rounded-lg bg-lime p-3 text-midnight focus:top-3">Skip to content</a>
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-midnight text-white shadow-sm">
+      <div className="mx-auto flex min-h-12 max-w-[1440px] flex-wrap items-center gap-4 px-4 py-2 sm:px-6 lg:gap-7">
+        <Link to={home} onClick={close} className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight" aria-label="DealersHub store home"><Package size={23} className="text-lime" aria-hidden="true"/>DealersHub</Link>
+        <nav aria-label="Dealer navigation" className="hidden items-center gap-1 md:flex">{navigation.map(item=><NavLink key={item.name} to={item.to} end={item.end} onClick={close} className={({isActive})=>`inline-flex min-h-7 items-center rounded-full px-3 text-xs font-medium transition-colors ${isActive?"bg-lime text-midnight":"text-slate-200 hover:bg-white/10"}`}>{item.name}</NavLink>)}</nav>
+        <div className="ml-auto flex items-center gap-3">
+          {current&&<Link to={routeBuilders.cart(current.id)} className="relative inline-flex size-9 items-center justify-center rounded-full hover:bg-white/10" aria-label={`Cart${cart.data?`, ${cart.data.items.length} product lines`:""}`}><ShoppingCart size={19}/>{Boolean(cart.data?.items.length)&&<span className="absolute -right-1 -top-1 grid min-w-4 place-items-center rounded-full bg-lime px-1 text-[10px] font-semibold text-midnight">{cart.data?.items.length}</span>}</Link>}
+          <Link to={routes.dealer.profile} className="flex items-center gap-2" title={user?.email}><span className="grid size-8 place-items-center rounded-full bg-white text-xs font-semibold text-midnight">{(user?.email?.[0]??"D").toUpperCase()}</span><span className="hidden lg:block"><strong className="block max-w-36 truncate text-xs font-medium">{user?.email}</strong><small className="text-[10px] text-slate-400">Dealer account</small></span></Link>
+          <button type="button" aria-label="Sign out" disabled={busy} onClick={()=>{void logout();}} className="grid size-9 place-items-center rounded-full text-slate-300 hover:bg-white/10 disabled:opacity-50"><LogOut size={17}/></button>
+          <button type="button" onClick={()=>setOpen(!open)} aria-label={open?"Close menu":"Open menu"} aria-expanded={open} aria-controls={menuId} className="grid size-9 place-items-center rounded-lg md:hidden">{open?<X size={20}/>:<Menu size={20}/>}</button>
         </div>
       </div>
-      <div className="ds-container ds-nav-row">
-        <nav id={menuId} className={`ds-main-nav ${menuOpen ? "ds-nav-open" : ""}`} aria-label="Dealer navigation">
-          <NavLink to={home} end onClick={close}>Store home</NavLink>
-          {current && <NavLink to={routeBuilders.storeProducts(current.id)} onClick={close}>All products</NavLink>}
-          <NavLink to={routes.dealer.orders} onClick={close}><Package size={15}/> My orders</NavLink>
-          <NavLink to={routes.dealer.profile} onClick={close}>Profile</NavLink>
-          <button className="ds-signout" type="button" disabled={busy} onClick={() => { void logout(); }}><LogOut size={15}/>{busy ? "Signing out…" : "Sign out"}</button>
-        </nav>
-        {(stores.data?.length ?? 0) > 1 ? <div className="ds-store-switch"><label htmlFor={selectId}>Switch store</label><select id={selectId} value={current?.id ?? ""} onChange={event => {
-          const selected = stores.data?.find(store => store.id === event.target.value); if (selected) { navigate(routeBuilders.store(selected.id)); close(); }
-        }}><option value="" disabled>Select authorized store</option>{stores.data?.map(store => <option key={store.id} value={store.id}>{store.businessName} · {store.name}</option>)}</select><ChevronDown size={13} aria-hidden="true"/></div> : <span className="ds-private-label"><span/>{current?.verified ? "Verified supplier · private access" : "Private dealer access"}</span>}
-      </div>
+      {open&&<nav id={menuId} aria-label="Mobile dealer navigation" className="mx-auto flex max-w-[1440px] flex-wrap gap-2 border-t border-white/10 p-3 md:hidden">{navigation.map(item=><NavLink key={item.name} to={item.to} end={item.end} onClick={close} className={({isActive})=>`rounded-full px-4 py-2 text-xs ${isActive?"bg-lime text-midnight":"text-slate-200"}`}>{item.name}</NavLink>)}</nav>}
     </header>
-    {error && <p role="alert" className="ds-container ds-error">{error}</p>}
-    <main className="ds-container ds-main" id="dealer-content"><Outlet/></main>
-    <footer className="ds-footer"><div className="ds-container"><div><strong>{current?.businessName ?? "DealersHub"}</strong><p>{current ? "Your authorized wholesale store." : "Private wholesale commerce for your business."}</p></div><div className="ds-footer-links"><Link to={home}>Store home</Link><Link to={routes.dealer.orders}>My orders</Link><Link to={routes.auth.acceptInvitation}>Invitations</Link></div><span className="ds-powered">Powered by <b>DealersHub</b></span></div></footer>
+    {((stores.data?.length??0)>1)&&<div className="border-b border-border bg-surface"><div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
+      {(stores.data?.length??0)>1&&<div className="flex min-w-0 items-center gap-2"><label htmlFor={switchId} className="text-xs text-muted">Store</label><select id={switchId} value={current?.id??""} onChange={event=>{const next=stores.data?.find(item=>item.id===event.target.value);if(next){navigate(routeBuilders.store(next.id));close();}}} className="min-h-9 max-w-64 rounded-lg border border-border bg-surface px-2 text-xs"><option value="" disabled>Select authorized store</option>{stores.data?.map(store=><option key={store.id} value={store.id}>{store.businessName} · {store.name}</option>)}</select></div>}
+
+    </div></div>}
+    {error&&<p role="alert" className="mx-auto w-full max-w-[1440px] px-4 py-3 text-sm text-danger">{error}</p>}
+    <main id="dealer-content" className="mx-auto w-full max-w-[1440px] flex-1 px-4 py-5 sm:px-6"><Outlet/></main>
+    <footer className="mt-8 border-t border-border bg-surface"><div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 py-5 text-xs sm:px-6"><div><strong className="font-semibold">{current?.businessName??"DealersHub"}</strong><p className="mt-1 text-[11px] text-muted">Private wholesale commerce · Powered by DealersHub</p></div><div className="flex gap-5"><Link to={home}>Store</Link><Link to={routes.dealer.orders}>My orders</Link><Link to={routes.auth.acceptInvitation}>Invitations</Link></div></div></footer>
   </div>;
 }
