@@ -1,5 +1,5 @@
 import "@/styles/auth-workspace.css";
-import { ArrowUpRight, ShieldCheck, Store, Users } from "lucide-react";
+import { ShieldCheck, Store, Users } from "lucide-react";
 import { Package } from "lucide-react";
 
 import {
@@ -18,7 +18,7 @@ export default function AuthLayout() {
         <Link to={routes.public.home} className="dh-onboarding-logo" aria-label="DealersHub home">
           <span><Package size={23} aria-hidden="true" /></span>DealersHub
         </Link>
-        <Link to={routes.auth.acceptInvitation} className="dh-onboarding-nav-link">Business invitations <ArrowUpRight size={16}/></Link>
+        <Link to={routes.auth.login} className="dh-onboarding-nav-link">Account login</Link>
       </div>
     </header>
     <main className="dh-onboarding-main">

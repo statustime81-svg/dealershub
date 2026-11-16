@@ -1,3 +1,5 @@
+import { AdminPasswordResetForm } from "@/features/auth/components/AdminPasswordResetForm";
+import { useBusiness } from "@/hooks/useBusiness";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
 
@@ -16,6 +18,7 @@ function DealerDetails({
 }: {
   dealerId: string;
 }) {
+  const {activeBusinessId}=useBusiness();
   const details = useDealerDetails(dealerId);
 
   if (details.isPending) {
@@ -50,6 +53,7 @@ function DealerDetails({
       />
 
       <DealerProfilePanel details={details.data} />
+      {activeBusinessId&&<AdminPasswordResetForm key={dealerId} userId={dealerId} businessId={activeBusinessId} label={details.data.dealer.company_name}/>}
     </div>
   );
 }

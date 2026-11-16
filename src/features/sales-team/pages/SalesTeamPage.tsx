@@ -69,8 +69,8 @@ function BusinessSalesTeam({
           }}
         >
           {inviteOpen
-            ? "Close invitation form"
-            : "+ Invite salesperson"}
+            ? "Close account form"
+            : "+ Create salesperson"}
         </Button>
 
         <Link
@@ -80,12 +80,7 @@ function BusinessSalesTeam({
           Assign dealers
         </Link>
 
-        <Link
-          to={routes.manufacturer.invitations}
-          className="inline-flex min-h-11 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium"
-        >
-          Manage invitations
-        </Link>
+
       </div>
 
       {inviteOpen && (
@@ -131,7 +126,7 @@ function BusinessSalesTeam({
           ) : (
             <EmptyState
               title="No salespeople found"
-              description="Accepted invitations appear here."
+              description="Created salesperson accounts appear here."
             />
           )}
 

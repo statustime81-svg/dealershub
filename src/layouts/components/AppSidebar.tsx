@@ -42,11 +42,6 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
         </NavLink>;
       })}
     </nav>
-    <div className="mt-auto shrink-0 border-t border-white/10 pt-5">
-      <NavLink to={routes.auth.acceptInvitation} onClick={onNavigate}
-        className="inline-flex min-h-11 items-center text-xs text-slate-300 hover:text-white">
-        Business invitations
-      </NavLink>
-    </div>
+
   </div>;
 }

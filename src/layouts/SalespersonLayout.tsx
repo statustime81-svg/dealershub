@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/shared/Logo";
 import { BusinessSwitcher } from "./components/BusinessSwitcher";
@@ -19,7 +19,6 @@ export default function SalespersonLayout() {
   return <div className="min-h-dvh bg-canvas">
     <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col gap-6 bg-midnight p-4 text-white lg:flex">
       <Logo to={`${routes.salesperson.dealers}${query}`} /><BusinessSwitcher />{navigation}
-      <Link to={routes.auth.acceptInvitation} className="mt-auto inline-flex min-h-11 items-center text-xs text-slate-300">Business invitations</Link>
     </aside>
     <div className="lg:pl-64">
       <header className="sticky top-0 z-40 border-b border-border bg-surface px-4 py-3 shadow-sm sm:px-6">

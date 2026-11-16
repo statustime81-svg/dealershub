@@ -16,7 +16,7 @@ export default function DealerLayout(){
   const home=current?routeBuilders.store(current.id):routes.dealer.stores;
   const close=()=>setOpen(false);
   async function logout(){setBusy(true);setError("");try{await signOut();navigate(routes.auth.login,{replace:true});}catch{setError("Unable to sign out. Please try again.");}finally{setBusy(false);}}
-  const navigation=[{name:"Store",to:home,end:true},{name:"My orders",to:routes.dealer.orders},{name:"Profile",to:routes.dealer.profile},{name:"Invitations",to:routes.auth.acceptInvitation}];
+  const navigation=[{name:"Store",to:home,end:true},{name:"My orders",to:routes.dealer.orders},{name:"Profile",to:routes.dealer.profile}];
   return <div className="ds-shell flex min-h-dvh flex-col bg-canvas font-sans text-foreground">
     <a href="#dealer-content" className="fixed -top-20 left-4 z-[100] rounded-lg bg-lime p-3 text-midnight focus:top-3">Skip to content</a>
     <header className="sticky top-0 z-40 border-b border-white/10 bg-midnight text-white shadow-sm">
@@ -38,6 +38,6 @@ export default function DealerLayout(){
     </div></div>}
     {error&&<p role="alert" className="mx-auto w-full max-w-[1440px] px-4 py-3 text-sm text-danger">{error}</p>}
     <main id="dealer-content" className="mx-auto w-full max-w-[1440px] flex-1 px-4 py-5 sm:px-6"><Outlet/></main>
-    <footer className="mt-8 border-t border-border bg-surface"><div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 py-5 text-xs sm:px-6"><div><strong className="font-semibold">{current?.businessName??"DealersHub"}</strong><p className="mt-1 text-[11px] text-muted">Private wholesale commerce · Powered by DealersHub</p></div><div className="flex gap-5"><Link to={home}>Store</Link><Link to={routes.dealer.orders}>My orders</Link><Link to={routes.auth.acceptInvitation}>Invitations</Link></div></div></footer>
+    <footer className="mt-8 border-t border-border bg-surface"><div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 py-5 text-xs sm:px-6"><div><strong className="font-semibold">{current?.businessName??"DealersHub"}</strong><p className="mt-1 text-[11px] text-muted">Private wholesale commerce · Powered by DealersHub</p></div><div className="flex gap-5"><Link to={home}>Store</Link><Link to={routes.dealer.orders}>My orders</Link></div></div></footer>
   </div>;
 }

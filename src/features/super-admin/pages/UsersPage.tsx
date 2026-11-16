@@ -18,7 +18,7 @@ export default function UsersPage(){
   const users=usePlatformUsers({...debounced,page});const pages=Math.max(1,Math.ceil((users.data?.total??0)/(users.data?.pageSize??15)));
   function go(next:number){setPagination({key,page:Math.max(1,Math.min(pages,next))});}
   return <div className="space-y-6"><PageHeader title="Users" description="Registered accounts and their assigned platform/business roles."/>
-    <p className="text-xs leading-5 text-muted">This directory is read-only. Assigned roles do not imply active business or store access. Team memberships count business-team links, not dealer-store authorizations.</p>
+    <p className="text-xs leading-5 text-muted">Use Reset password to set a user’s new password. Assigned roles do not imply active business or store access. Team memberships count business-team links, not dealer-store authorizations.</p>
     <div className="grid gap-3 sm:grid-cols-[1fr_220px]"><SearchInput label="Search users" placeholder="Search name or email…" maxLength={200} value={filters.search} onChange={event=>setFilters(current=>({...current,search:event.target.value}))}/>
       <Select aria-label="Assigned role" value={filters.role} onChange={event=>{const result=platformRoleSchema.safeParse(event.target.value);if(event.target.value==="all")setFilters(current=>({...current,role:"all"}));else if(result.success)setFilters(current=>({...current,role:result.data}));}}>
         <option value="all">All assigned roles</option>{platformRoleSchema.options.map(role=><option key={role} value={role}>{roleLabels[role]}</option>)}

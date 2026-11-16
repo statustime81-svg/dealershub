@@ -1,0 +1,9 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { accountAdminAction } from "../account-admin.api";
+export function AdminPasswordResetForm({userId,businessId,label}:{userId:string;businessId?:string;label:string}) {
+ const [busy,setBusy]=useState(false),[message,setMessage]=useState(""),[error,setError]=useState("");
+ async function submit(event:React.FormEvent<HTMLFormElement>){event.preventDefault();if(busy)return;const form=event.currentTarget,values=new FormData(form);setMessage("");setError("");const password=String(values.get("password")??"");if(password!==values.get("confirmPassword")){setError("Passwords do not match.");return;}setBusy(true);try{await accountAdminAction("admin-reset-account-password",{userId,...(businessId?{businessId}:{}),password});form.reset();setMessage("Password updated. Share the new password privately with this user.");}catch(e){setError(e instanceof Error?e.message:"Reset failed.");}finally{setBusy(false);}}
+ return <form onSubmit={submit} className="space-y-3 rounded-xl border border-border bg-surface p-4"><h2 className="text-sm font-semibold">Admin password reset</h2><p className="text-xs text-muted">Account: {label}</p><fieldset disabled={busy} className="grid gap-3 sm:grid-cols-2"><Input name="password" label="New password" type="password" required minLength={12} maxLength={128} autoComplete="new-password"/><Input name="confirmPassword" label="Confirm password" type="password" required minLength={12} maxLength={128} autoComplete="new-password"/></fieldset>{error&&<p role="alert" className="text-sm text-danger">{error}</p>}{message&&<p role="status" className="text-sm text-success">{message}</p>}<Button size="sm" type="submit" isLoading={busy}>Set new password</Button></form>;
+}

@@ -88,8 +88,8 @@ function StoreDealers({
         }}
       >
         {inviteOpen
-          ? "Close invitation form"
-          : "+ Invite dealer"}
+          ? "Close account form"
+          : "+ Create dealer"}
       </Button>
 
       {inviteOpen && (
@@ -168,7 +168,7 @@ function StoreDealers({
           ) : (
             <EmptyState
               title="No dealers found"
-              description="Accepted invitations and existing access requests appear here."
+              description="Created dealer accounts and existing store access appear here."
             />
           )}
 

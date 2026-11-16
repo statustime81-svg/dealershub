@@ -1,3 +1,4 @@
+import { AdminPasswordResetForm } from "@/features/auth/components/AdminPasswordResetForm";
 import { Link, useParams } from "react-router-dom";
 
 import { z } from "zod";
@@ -72,6 +73,7 @@ function SalespersonDetails({
         description="Membership and dealer assignments."
       />
 
+      {activeBusinessId&&<AdminPasswordResetForm key={salespersonId} userId={salespersonId} businessId={activeBusinessId} label={person.name || "Salesperson"}/>}
       <section className="grid gap-4 rounded-xl border border-border bg-surface p-5 sm:grid-cols-3">
         <div>
           <p className="text-xs text-muted">Phone</p>

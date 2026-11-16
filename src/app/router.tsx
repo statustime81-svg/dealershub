@@ -34,11 +34,6 @@ import { RoleGuard } from "@/guards/RoleGuard";
 import { StoreAccessGuard } from "@/guards/StoreAccessGuard";
 import WorkspaceEntry from "@/pages/WorkspaceEntry";
 import LoginPage from "@/features/auth/pages/LoginPage";
-import RegisterBusinessPage from "@/features/auth/pages/RegisterBusinessPage";
-import ForgotPasswordPage from "@/features/auth/pages/ForgotPasswordPage";
-import ResetPasswordPage from "@/features/auth/pages/ResetPasswordPage";
-import AcceptInvitationPage from "@/features/auth/pages/AcceptInvitationPage";
-import BusinessInvitationsPage from "@/features/auth/pages/BusinessInvitationsPage";
 import ManufacturerDashboardPage from "@/features/dashboard/pages/ManufacturerDashboardPage";
 import ProductsPage from "@/features/catalog/pages/ProductsPage";
 import AddProductPage from "@/features/catalog/pages/AddProductPage";
@@ -74,10 +69,10 @@ export const router = createBrowserRouter([
     children: [
       
       { path: routes.auth.login, element: <LoginPage /> },
-      { path: routes.auth.register, element: <RegisterBusinessPage /> },
-      { path: routes.auth.forgotPassword, element: <ForgotPasswordPage /> },
-      { path: routes.auth.resetPassword, element: <ResetPasswordPage /> },
-      { path: routes.auth.acceptInvitation, element: <AcceptInvitationPage /> },
+      { path: routes.auth.register, element: <Navigate to={routes.auth.login} replace /> },
+      { path: routes.auth.forgotPassword, element: <Navigate to={routes.auth.login} replace /> },
+      { path: routes.auth.resetPassword, element: <Navigate to={routes.auth.login} replace /> },
+      { path: routes.auth.acceptInvitation, element: <Navigate to={routes.auth.login} replace /> },
       { element: <AuthGuard />, children: [{ path: routes.onboarding, element: <WorkspaceEntry /> }] },
     ],
   },
@@ -145,7 +140,7 @@ export const router = createBrowserRouter([
               { path: "sales-team", element: <SalesTeamPage /> },
               { path: "sales-team/:salespersonId", element: <SalespersonDetailsPage /> },
               { path: "assignments", element: <DealerAssignmentsPage /> },
-              { path: "invitations", element: <BusinessInvitationsPage /> },
+              { path: "invitations", element: <Navigate to={routes.manufacturer.dealers} replace /> },
               { path: "orders", element: <ManufacturerOrdersPage /> },
               { path: "orders/:orderId", element: <OrderDetailsPage mode="manufacturer" /> },
             ],

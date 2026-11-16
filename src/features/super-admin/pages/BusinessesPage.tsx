@@ -1,3 +1,4 @@
+import { CreateManufacturerForm } from "../components/CreateManufacturerForm";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
@@ -18,7 +19,10 @@ export default function BusinessesPage(){
   const businesses=usePlatformBusinesses({...debounced,page});
   const pages=Math.max(1,Math.ceil((businesses.data?.total??0)/(businesses.data?.pageSize??15)));
   function go(next:number){setPagination({key,page:Math.max(1,Math.min(pages,next))});}
+  const [createOpen,setCreateOpen]=useState(false);
   return <div className="space-y-6"><PageHeader title="Businesses" description="Review registered manufacturers and distributors."/>
+    <Button onClick={()=>setCreateOpen(value=>!value)}>{createOpen?"Close account form":"+ Create manufacturer"}</Button>
+    {createOpen&&<CreateManufacturerForm/>}
     <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
       <SearchInput label="Search businesses" placeholder="Search company or contact email…" maxLength={200} value={filters.search} onChange={event=>setFilters(current=>({...current,search:event.target.value}))}/>
       <Select aria-label="Business status" value={filters.status} onChange={event=>{const result=businessStatusSchema.safeParse(event.target.value);if(event.target.value==="all")setFilters(current=>({...current,status:"all"}));else if(result.success)setFilters(current=>({...current,status:result.data}));}}>
