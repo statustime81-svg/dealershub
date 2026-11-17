@@ -7,7 +7,7 @@ import {
 import { routes } from "@/config/routes";
 
 import DashboardPreview from "@/components/landing/DashboardPreview";
-const storefrontImage = "/images/landing/storefront-preview.png";
+import StorefrontPreview from "@/components/landing/StorefrontPreview";
 const features = [
   { icon: Package, number: "01", title: "A catalog that means business.", text: "Product photos, variants, wholesale pricing and minimum quantities. Your products, presented your way.", chips: ["Products & variants", "Wholesale prices", "MOQ"] },
   { icon: Users, number: "02", title: "Your network. Connected.", text: "Authorize dealers, assign your salespeople and bring the people behind your business into one workspace.", chips: ["Dealer access", "Sales assignments", "Team accounts"] },
@@ -114,7 +114,7 @@ export default function LandingPage() {
     </section>
 
     <section className="dh-commerce-section" id="storefront"><div className="dh-container dh-commerce-grid">
-      <div className="dh-commerce-visual" data-reveal><div className="dh-browser-line"><span><Store size={14}/> YOUR BRANDED WHOLESALE STORE</span><span className="dh-preview-tag">DESIGN PREVIEW</span></div><div className="dh-commerce-image"><img src={storefrontImage} width={1536} height={1024} alt="Approved DealersHub storefront design showing cleaning products, categories, product details and cart" loading="lazy" decoding="async"/></div><div className="dh-commerce-note"><CircleCheck size={16}/><span>Illustrative storefront and product data.</span></div></div>
+      <div className="dh-commerce-visual" data-reveal><div className="dh-browser-line"><span><Store size={14}/> YOUR BRANDED WHOLESALE STORE</span><span className="dh-preview-tag">DESIGN PREVIEW</span></div><div className="dh-commerce-image"><StorefrontPreview/></div><div className="dh-commerce-note"><CircleCheck size={16}/><span>Illustrative storefront and product data.</span></div></div>
       <div className="dh-commerce-copy" data-reveal><p className="dh-eyebrow">YOUR BRAND. YOUR STORE.</p><h2>Wholesale.<br/>With a retail<br/><span>level of care.</span></h2><p>Give your dealers a clear, familiar way to discover your products. Keep the wholesale details that matter, from variants and packaging to pricing and MOQ.</p><ul>{["A branded catalog for your business", "Product photos, categories and variants", "Private access for authorized dealers"].map(text => <li key={text}><span><Check size={13}/></span>{text}</li>)}</ul><Link className="dh-text-link" to={routes.auth.login}>Open your store <span><ArrowUpRight size={17}/></span></Link></div>
     </div></section>
 
