@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { routes } from "@/config/routes";
 
-const dashboardImage = "/images/landing/dashboard-preview.png";
+import DashboardPreview from "@/components/landing/DashboardPreview";
 const storefrontImage = "/images/landing/storefront-preview.png";
 const features = [
   { icon: Package, number: "01", title: "A catalog that means business.", text: "Product photos, variants, wholesale pricing and minimum quantities. Your products, presented your way.", chips: ["Products & variants", "Wholesale prices", "MOQ"] },
@@ -75,7 +75,7 @@ function HeroScene({ motion }: { motion: boolean }) {
       <div className="dh-window-shadow" aria-hidden="true"/>
       <div className="dh-preview-window">
         <div className="dh-window-bar"><div className="dh-window-dots"><i/><i/><i/></div><span>DealersHub / Business workspace</span><ShieldCheck size={13}/></div>
-        <img src={dashboardImage} alt="Approved DealersHub dashboard design preview with catalog, dealer and order management" width={1672} height={941} fetchPriority="high" decoding="async"/>
+        <DashboardPreview/>
         <div className="dh-window-foot"><span className="dh-preview-tag">INTERFACE PREVIEW</span><span>Illustrative data</span></div>
       </div>
       <div className="dh-float-card dh-float-access"><span className="dh-float-icon"><ShieldCheck size={20}/></span><div><strong>Private by design</strong><span>Only your authorized network.</span></div><span className="dh-mini-check"><Check size={12}/></span></div>
