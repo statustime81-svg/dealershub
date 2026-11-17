@@ -40,7 +40,7 @@ function useLandingMotion() {
     const elements = root.current.querySelectorAll<HTMLElement>("[data-reveal]");
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) { entry.target.classList.add("dh-is-visible"); observer.unobserve(entry.target); }
-    }), { threshold: 0.12, rootMargin: "0px 0px -20px 0px" });
+    }), { threshold: 0.04, rootMargin: "0px 0px -20px 0px" });
     elements.forEach(element => observer.observe(element));
     return () => observer.disconnect();
   }, [motion]);
@@ -99,12 +99,12 @@ export default function LandingPage() {
     <section className="dh-hero dh-container">
       <div className="dh-hero-copy">
         <p className="dh-eyebrow"><span className="dh-pulse-dot"/> THE PRIVATE WHOLESALE PLATFORM</p>
-        <h1>Your business.<br/>Your network.<br/><span className="dh-hero-highlight">All connected.<svg viewBox="0 0 580 18" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12Q285-1 576 8" fill="none" stroke="currentColor" strokeWidth="7" strokeLinecap="round"/></svg></span></h1>
+        <h1><span className="dh-heading-line"><span>Your business.</span></span><span className="dh-heading-line"><span>Your network.</span></span><span className="dh-heading-line dh-heading-line-last"><span className="dh-hero-highlight">All connected.<svg viewBox="0 0 580 18" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12Q285-1 576 8" fill="none" stroke="currentColor" strokeWidth="7" strokeLinecap="round"/></svg></span></span></h1>
         <p className="dh-hero-description">A better home for your wholesale business. Bring your store, products, dealers and sales team together in one beautifully organized workspace.</p>
         <div className="dh-hero-buttons"><Link className="dh-button dh-button-dark" to={routes.auth.login}>Open your workspace <ArrowUpRight size={18}/></Link><a className="dh-text-link" href="#platform">Explore the platform <span><ArrowRight size={17}/></span></a></div>
         <div className="dh-hero-assurances"><span><Check size={14}/> Your own private store</span><span><Check size={14}/> Access you control</span></div>
       </div>
-      <HeroScene motion={motion}/>
+      <div className="dh-hero-scene-reveal dh-hero-image-enter"><HeroScene motion={motion}/></div>
     </section>
     <div className="dh-platform-strip"><div className="dh-container dh-strip-inner"><span className="dh-strip-label">PURPOSE-BUILT FOR</span>{["MANUFACTURERS", "DISTRIBUTORS", "DEALERS", "SALES TEAMS"].map((item, i) => <span className="dh-strip-item" key={item}><i aria-hidden="true">{["✳", "↗", "◈", "⊞"][i]}</i>{item}</span>)}</div></div>
 
