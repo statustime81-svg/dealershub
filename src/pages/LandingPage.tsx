@@ -6,13 +6,9 @@ import {
 } from "lucide-react";
 import { routes } from "@/config/routes";
 
+import ConnectedPlatformSection from "@/components/landing/ConnectedPlatformSection";
 import DashboardPreview from "@/components/landing/DashboardPreview";
 import StorefrontPreview from "@/components/landing/StorefrontPreview";
-const features = [
-  { icon: Package, number: "01", title: "A catalog that means business.", text: "Product photos, variants, wholesale pricing and minimum quantities. Your products, presented your way.", chips: ["Products & variants", "Wholesale prices", "MOQ"] },
-  { icon: Users, number: "02", title: "Your network. Connected.", text: "Authorize dealers, assign your salespeople and bring the people behind your business into one workspace.", chips: ["Dealer access", "Sales assignments", "Team accounts"] },
-  { icon: ClipboardList, number: "03", title: "Keep every order in view.", text: "Bring dealer and sales-team orders together. Review incoming requests and follow the order journey in one place.", chips: ["Order history", "Status tracking", "Business reports"] },
-];
 const roles = [
   { label: "Manufacturer", title: "Build your own wholesale world.", text: "Open your store, organize your catalog and manage your dealer relationships.", icon: Store },
   { label: "Distributor", title: "Make your network work together.", text: "Give your authorized dealers a dedicated place to discover your products and prepare orders.", icon: Layers3 },
@@ -108,10 +104,7 @@ export default function LandingPage() {
     </section>
     <div className="dh-platform-strip"><div className="dh-container dh-strip-inner"><span className="dh-strip-label">PURPOSE-BUILT FOR</span>{["MANUFACTURERS", "DISTRIBUTORS", "DEALERS", "SALES TEAMS"].map((item, i) => <span className="dh-strip-item" key={item}><i aria-hidden="true">{["✳", "↗", "◈", "⊞"][i]}</i>{item}</span>)}</div></div>
 
-    <section className="dh-section dh-container" id="platform">
-      <div className="dh-section-heading" data-reveal><div><p className="dh-eyebrow">ONE CONNECTED PLATFORM</p><h2>Less scattered.<br/><span>More in control.</span></h2></div><p>From the first product in your catalog to the next dealer in your network. Give your business room to move.</p></div>
-      <div className="dh-feature-grid">{features.map(({ icon: Icon, number, title, text, chips }) => <article className="dh-feature" data-reveal key={number}><div className="dh-feature-top"><span className="dh-feature-icon"><Icon size={24}/></span><span className="dh-index">/{number}</span></div><h3>{title}</h3><p>{text}</p><div className="dh-feature-chips">{chips.map(chip => <span key={chip}>{chip}</span>)}</div></article>)}</div>
-    </section>
+    <ConnectedPlatformSection />
 
     <section className="dh-commerce-section" id="storefront"><div className="dh-container dh-commerce-grid">
       <div className="dh-commerce-visual" data-reveal><div className="dh-browser-line"><span><Store size={14}/> YOUR BRANDED WHOLESALE STORE</span><span className="dh-preview-tag">DESIGN PREVIEW</span></div><div className="dh-commerce-image"><StorefrontPreview/></div><div className="dh-commerce-note"><CircleCheck size={16}/><span>Illustrative storefront and product data.</span></div></div>
